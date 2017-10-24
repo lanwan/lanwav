@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+﻿#-------------------------------------------------------------------------------
 # Name:        ai_udp_server.py
 # Purpose:
 #
@@ -9,10 +9,9 @@
 # Licence:
 #-------------------------------------------------------------------------------
 
-import socketserver
-import logging
+import SocketServer
 
-class MyUDPHandler(socketserver.BaseRequestHandler):
+class MyUDPHandler(SocketServer.BaseRequestHandler):
     """
     This class works similar to the TCP handler class, except that
     self.request consists of a pair of data and client socket, and since
@@ -23,12 +22,13 @@ class MyUDPHandler(socketserver.BaseRequestHandler):
     def handle(self):
         data = self.request[0].strip()
         socket = self.request[1]
-        print("{} wrote:".format(self.client_address[0]))
-        print(data)
+        print "{} wrote:".format(self.client_address[0])
+        print data
         socket.sendto(data.upper(), self.client_address)
 
 if __name__ == "__main__":
-    HOST, PORT = "0.0.0.0", 9000
-    with socketserver.UDPServer((HOST, PORT), MyUDPHandler) as server:
-        server.serve_forever()
+    HOST, PORT = "0.0.0.0", 9500
+    server = SocketServer.UDPServer((HOST, PORT), MyUDPHandler)
+    server.serve_forever()
+
 
