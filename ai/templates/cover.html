@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn">
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<meta name="viewport" content="width=device-width" />
+</head>
+<body>
+
+
+<div data-role="page"  id="device">
+  <div data-role="header" data-position="fixed">
+    <a href="#main" data-role="button" data-icon="home">井盖小兵</a>
+    <h1>井盖信息</h1>
+  </div>
+
+  <div data-role="content">
+    <h3>{ escape(station['name']) }</h3>
+    <ul data-role="listview">
+      <li>接收时间：{ escape(station['time']) }</li>
+      <li>电池电压：{ escape(station['voltage']) }V</li>
+      <li>信号强度：{ escape(station['signal']) }dBm</li>
+      <li>安装位置GPS坐标：{ escape(station['lan']), escape(station['lot']) }</li>
+      <li>井盖姿态：{ escape(station[attitude']) }</li>
+      <li>累计服务时间：{ escape(station['livetime']) }</li>
+      <li>累计上报次数：{ escape(station['livenum']) }</li>
+    </ul>
+   <table data-role="table" id="talbe_cover_day_list" data-mode="reflow" class="ui-responsive">
+     <thead>
+       <tr>
+         <th data-priority="2">接收时间</th>
+         <th>井盖姿态</th>
+         <th data-priority="3">电池电压</th>
+         <th data-priority="1">信号强度</th>
+       </tr>
+     </thead>
+     <tbody>
+       {% for item in items %}
+       <tr>
+         <th>{ escape(item['time']) }</th>
+         <td>{ escape(item['attitude']) }</td>
+         <td>{ escape(item['voltage']) }V</td>
+         <td>{ escape(item['signal']) }dBm</td>
+       </tr>
+       {% end %}
+     </tbody>
+   </table>
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+  <h1>导航</h1>
+  </div>
+
+</div>
+
+</body>
+</html>
