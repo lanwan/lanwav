@@ -11,16 +11,21 @@
 
 
 import logging
-import io_boot
+import os
 
 debug = 0
 
-io_setttins['host'] = "0.0.0.0"
-if io_boot.debug:
-    io_setttins['port']  = 9100
-else:
-    io_setttins['port']  = 9800
+settings = {}
 
+settings['host'] = "0.0.0.0"
+if debug:
+    settings['port']  = 9100
+else:
+    settings['port']  = 9800
+
+settings['db_path'] = os.getcwd()
+
+settings['webport'] = 8090
 
 def main():
     pass
