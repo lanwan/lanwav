@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cmn">
+<head>
+	
+<meta name="viewport" content="width=device-width" />
+<meta charset="UTF-8" />
+
+<link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+<script src="./js/jquery-1.8.3.min.js"></script>
+<script src="./js/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<body>
+
+
+<div data-role="page"  id="login">
+  <div data-role="header" data-position="fixed">
+    <h1>井盖小兵</h1>
+  </div>
+
+<div data-role="content">
+    <form name="login" method="post" action="/login">
+      <div data-role="fieldcontain">
+        <label for="fullname">用户名：</label>
+        <input type="text" name="fullname" id="fullname">
+        <label for="pwd">密码：</label>
+        <input type="password" name="pwd" id="pwd">
+   		<label for="switch">记住密码：</label>
+        <select name="save" id="save" data-role="slider">
+          <option value="off"></option>
+          <option value="on" selected>记住</option>
+        </select>
+      </div>
+
+      <input type="submit" data-inline="true" value="登录">
+			{{ xsrf_form_html() }}
+    </form>
+</div>
+
+  <div data-role="footer" data-position="fixed">
+  	<div data-role="navbar" >
+  		<ul>
+        <li><a href="http://www.lanwav.com">Design by www.lanwav.com</a></li>
+        </ul>
+  	</div>
+  </div>
+
+</div>
+
+</body>
+</html>
