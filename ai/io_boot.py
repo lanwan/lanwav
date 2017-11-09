@@ -23,37 +23,33 @@ logging.root.addHandler(__loghandle)
 
 
 # setup sites
-import site
-__sites_path = os.path.join(os.getcwd(), 'sites//')
-logging.info(__sites_path)
-if os.path.exists(__sites_path):
-	site.addsitedir(__sites_path)
-else:
-	logging.warn("%s does not exists!",__sites_path)
+##import site
+##__sites_path = os.path.join(os.getcwd(), 'sites//')
+##logging.info(__sites_path)
+##if os.path.exists(__sites_path):
+##	site.addsitedir(__sites_path)
+##else:
+##	logging.warn("%s does not exists!",__sites_path)
 
 # check sites
-try:
-    import tornado
-    import tornado.ioloop
-    import tornado.web
-except:
-    logging.error('Load tornado library fail!')
-
+import tornado
+import tornado.ioloop
+import tornado.web
 
 import subprocess
 # boot server
 import io_udp_server
 import io_config
-import db_server
-import app_guard_server
+import io_db
+import io_app
 
 def boot():
 
     print "1. load memory database server"
 
     # load memory database server
-    dbserver = db_server.IOTDBServer(io_config.settings['db_path'], "covguard")
-    dbserver.load()
+    io_db.dbserver = io_db.IOTDBServer(io_config.settings['db_path'], "covguard")
+    io_db.dbserver.load()
 
 
     #print "2. boot io udp server"
@@ -63,7 +59,7 @@ def boot():
 
     print "3. boot app server"
     # boot app server
-    app_guard_server.run()
+    io_app.run()
 
 if __name__ == '__main__':
     boot()

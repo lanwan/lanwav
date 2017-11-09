@@ -15,14 +15,14 @@
 <div data-role="page" id="main" >
 
   <div data-role="header" data-position="fixed">
-    <a href="#main" data-role="button" data-icon="home">井盖小兵</a>
+    <a href="/app/main#main" data-role="button" data-icon="home">井盖小兵</a>
     <h1>全部监视井盖清单</h1>
   </div>
 
   <div data-role="content">
     <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true" data-filter-placeholder="输入查询关键字或拼音">
       {% for item in items %}
-      <li data-icon="false"><a href="app/cover">{{ escape(item) }}</a></li>
+      <li data-icon="false"><a href="/app/cover?id={{escape(item)}}">{{ escape(item) }}</a></li>
       {% end %}
     </ul>
   </div>
@@ -42,7 +42,7 @@
 
 <div data-role="page" id="alertpush">
   <div data-role="header" data-position="fixed">
-    <a href="#main" data-role="button" data-icon="home">井盖小兵</a>
+    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
     <h1>24小时内发生报警井盖清单</h1>
   </div>
 
@@ -68,7 +68,7 @@
 
 <div data-role="page"  id="aipush">
   <div data-role="header" data-position="fixed">
-    <a href="#main" data-role="button" data-icon="home">井盖小兵</a>
+    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
     <h1>近30日连续异动井盖清单</h1>
   </div>
 
@@ -95,7 +95,7 @@
 
 <div data-role="page"  id="setting">
   <div data-role="header" data-position="fixed">
-    <a href="#main" data-role="button" data-icon="home">井盖小兵</a>
+    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
     <h1>系统设置</h1>
   </div>
 
@@ -119,7 +119,7 @@
 
 <div data-role="page"  id="device">
   <div data-role="header" data-position="fixed">
-    <a href="#main" data-role="button" data-icon="home">井盖小兵</a>
+    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
     <h1>井盖信息</h1>
   </div>
 
