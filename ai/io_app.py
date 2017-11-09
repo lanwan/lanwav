@@ -68,10 +68,11 @@ class LogoutHandler(BaseHandler):
             self.clear_cookie("userid")
             self.redirect("/")
 
-
+################################################################################
 debug_cmds = []
 class ReportHandler(BaseHandler):
     def get(self):
+        global debug_cmds
         cmd = self.get_argument('DT', '')
         if len(cmd):
             debug_cmds.append(cmd)
@@ -82,13 +83,14 @@ class ReportHandler(BaseHandler):
 
 class DebugHandler(BaseHandler):
     def get(self):
+        global debug_cmds
         cmd = self.get_argument('cmd', '')
         if cmd == '1':
             return self.write( ''.join(debug_cmds) )
         else:
             debug_cmds = []
             return self.write( 'clear done' )
-
+################################################################################
 
 class AdminHandler(BaseHandler):
     def get_login_url(self):
