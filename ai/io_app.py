@@ -69,9 +69,25 @@ class LogoutHandler(BaseHandler):
             self.redirect("/")
 
 
+debug_cmds = []
 class ReportHandler(BaseHandler):
     def get(self):
-        return self.write(self.get_argument('DT'))
+        cmd = self.get_argument('DT', '')
+        if len(cmd):
+            debug_cmds.append(cmd)
+            return self.write(cmd)
+        else:
+            return self.write('ERROR')
+
+
+class DebugHandler(BaseHandler):
+    def get(self):
+        cmd = self.get_argument('cmd', '')
+        if cmd == '1':
+            return self.write( ''.join(debug_cmds) )
+        else:
+            debug_cmds = []
+            return self.write( 'clear done' )
 
 
 class AdminHandler(BaseHandler):
@@ -114,6 +130,7 @@ def run():
         (r"/login", LoginHandler),
         (r"/logout", LogoutHandler),
         (r"/report", ReportHandler),
+        (r"/debug", DebugHandler),
         (r'/app/ws', WebSocketHandler),
         ],
         **settings)
