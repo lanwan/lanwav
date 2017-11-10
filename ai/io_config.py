@@ -13,7 +13,7 @@
 import logging
 import os
 
-debug = 0
+debug = 1
 
 settings = {}
 

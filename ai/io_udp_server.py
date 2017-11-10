@@ -16,11 +16,11 @@ import io_config
 server = None
 
 class AiUDPServer(SocketServer.BaseRequestHandler):
-
     def handle(self):
         data = self.request[0].strip()
+        print data
         socket = self.request[1]
-        socket.sendto(data.upper(), self.client_address)
+        socket.sendto(data, self.client_address)
 
 def run(host, port):
     server = SocketServer.UDPServer((host, port), AiUDPServer)
@@ -33,7 +33,7 @@ def stop():
         server = None
 
 if __name__ == "__main__":
-     HOST, PORT = io_config.io_setttins['host'], io_config.io_setttins['port']
-     run_udp_server(HOST,PORT)
+     HOST, PORT = io_config.settings['host'], io_config.settings['port']
+     run(HOST,PORT)
 
 
