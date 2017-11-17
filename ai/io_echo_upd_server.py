@@ -12,16 +12,35 @@
 import SocketServer
 import logging
 import io_config
-import urllib
+import urllib2
 
 server = None
 
+import urllib
+import urllib2
+
+def httpGet(url):
+    user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+    headers = { 'User-Agent' : user_agent }
+    try:
+        request = urllib2.Request(url, headers = headers)
+        response = urllib2.urlopen(request)
+        print response.read()
+    except urllib2.URLError, e:
+        if hasattr(e,"code"):
+            print e.code
+        if hasattr(e,"reason"):
+            print e.reason
+
 class AiUDPServer(SocketServer.BaseRequestHandler):
     def handle(self):
-        data = self.request[0].strip()
+        data = self.request[0].strip().replace(" ", "")
         socket = self.request[1]
         socket.sendto(data, self.client_address)
-        urllib.urlopen("http://120.55.61.110:8090/report?DT=", data)
+
+        s = "http://120.55.61.110:8090/report?DT=%s" % (data)
+        print s
+        httpGet(s)
 
 
 def run(host, port):
