@@ -27,14 +27,18 @@ class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         return self.get_secure_cookie("userid")
 
+    def get_current_role_id(self):
+        return self.get_secure_cookie("role_id")
+
 class MainHandler(BaseHandler):
     @tornado.web.asynchronous
     def post(self):
         if self.get_current_user():
             self.redirect('/app/main', True)
         else:
-            r = io_db.dbserver.verify( self.get_argument('userid'), self.get_argument('pwd'))
-            if r:
+            role_id = io_db.getShareDB().verify_user( self.get_argument('userid'), self.get_argument('pwd'))
+            if role_id:
+                self.set_secure_cookie("role_id", role_id)
                 if self.get_argument('save'):
                     self.set_secure_cookie("userid", self.get_argument("userid"))
                 self.redirect('/app/main', True)
@@ -52,6 +56,7 @@ class CoverHandler(BaseHandler):
     def get(self):
         items = ["Item 1", "Item 2", "Item 3"]
         self.render("cover.html", items=items)
+
 
 
 class LoginHandler(BaseHandler):
@@ -96,6 +101,8 @@ class AdminHandler(BaseHandler):
     def get_login_url(self):
         return '/admin/login'
 
+
+################################################################################
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         pass
@@ -105,6 +112,44 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         pass
+
+
+################################################################################
+
+##imei, battery bcs, battery bcl, battery vol, signal rssi, signal ber, longitude, latitude, sensor state, sensor x, sensor y, sensor z, global_count
+##            self.write( json.dumps([{"id":"1211", "imei":"1212233", "vol":3.3, "rssi":18, "lon":"120.795172", "lat":"30.703541", "state":0, "x":12,"y":22,"z":98,"gct":11},
+##            {"id":"1111", "imei":"1212234", "vol":3.3, "rssi":18, "lon":"120.817019", "lat":"30.734338", "state":0, "x":12,"y":22,"z":98,"gct":11}]) )
+
+
+import json
+import zmq
+context = zmq.Context()
+socket = context.socket(zmq.REQ)
+socket.connect ("tcp://127.0.0.1:5000")
+
+
+def get_realtime_dataset(role_id):
+    cmd = {}
+    cmd['cmd'] = 'get_realtime_dataset'
+    cmd['p1'] = role_id
+    socket.send( json.dumps(cmd) )
+    s = socket.recv()
+    print s
+    return s
+
+
+class RealtimeDataHandler(BaseHandler):
+    @tornado.web.authenticated
+    @gen.coroutine
+    def get(self):
+        if self.get_current_user():
+            s = yield get_realtime_dataset( self.get_current_role_id() )
+            return self.write( s )
+        else:
+            return self.write('{error}')
+
+
+################################################################################
 
 
 # tornado global settings, such as template path, debug
@@ -134,6 +179,7 @@ def run():
         (r"/report", ReportHandler),
         (r"/debug", DebugHandler),
         (r'/app/ws', WebSocketHandler),
+        (r"/api/rtdata.json", RealtimeDataHandler),
         ],
         **settings)
 

@@ -9,14 +9,39 @@
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=dd7GVfbVwkFNdVHfhZgAdKL7GLLkjI3H"></script>
+	
 </head>
 <body>
+
+<div data-role="page"  id="map">
+	
+  <div data-role="header" data-position="fixed">
+    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
+    <h1>井盖分布</h1>
+  </div>
+
+  <div data-role="content" id="allmap" style="height:600px">
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+      	<li><a href="#map" data-icon="location" class="ui-btn-active ui-state-persist">地图</a></li>
+        <li><a href="#main" data-icon="grid">实时</a></li>
+        <li><a href="#alertpush" data-icon="alert">报警</a></li>
+        <li><a href="#aipush" data-icon="info">疑点</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</div>
 
 <div data-role="page" id="main" >
 
   <div data-role="header" data-position="fixed">
-    <a href="/app/main#main" data-role="button" data-icon="home">井盖小兵</a>
-    <h1>全部监视井盖清单</h1>
+    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
+    <h1>实时监视井盖清单</h1>
   </div>
 
   <div data-role="content">
@@ -30,10 +55,11 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li ><a href="#main" data-icon="grid" class="ui-btn-active ui-state-persist">全部</a></li>
+      	<li><a href="#map" data-icon="location">地图</a></li>
+        <li ><a href="#main" data-icon="grid" class="ui-btn-active ui-state-persist">实时</a></li>
         <li><a href="#alertpush" data-icon="alert">报警</a></li>
         <li><a href="#aipush" data-icon="info">疑点</a></li>
-        <li><a href="#setting" data-icon="gear">设置</a></li>
+        
       </ul>
     </div>
   </div>
@@ -47,7 +73,7 @@
   </div>
 
   <div data-role="content">
-    <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true">
+    <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true" data-filter-placeholder="输入查询关键字或拼音">
       <li data-icon="alert"><a href="#">列表项q</a></li>
 
     </ul>
@@ -56,10 +82,11 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="#main" data-icon="grid">全部</a></li>
+      	<li><a href="#map" data-icon="location">地图</a></li>
+        <li><a href="#main" data-icon="grid">实时</a></li>
         <li><a href="#alertpush" data-icon="alert" class="ui-btn-active ui-state-persist">报警</a></li>
         <li><a href="#aipush" data-icon="info">疑点</a></li>
-        <li><a href="#setting" data-icon="gear">设置</a></li>
+        
       </ul>
     </div>
   </div>
@@ -73,7 +100,7 @@
   </div>
 
     <div data-role="content">
-    <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true">
+    <ul data-role="listview" data-autodividers="true" data-inset="true" data-filter="true" data-filter-placeholder="输入查询关键字或拼音">
 
       <li data-icon="info"><a href="#">表项</a></li>
 
@@ -83,56 +110,93 @@
   <div data-role="footer" data-position="fixed">
     <div data-role="navbar">
       <ul>
-        <li><a href="#main" data-icon="grid">全部</a></li>
+      	<li><a href="#map" data-icon="location">地图</a></li>
+        <li><a href="#main" data-icon="grid">实时</a></li>
         <li><a href="#alertpush" data-icon="alert">报警</a></li>
         <li><a href="#aipush" data-icon="info" class="ui-btn-active ui-state-persist">疑点</a></li>
-        <li><a href="#setting" data-icon="gear">设置</a></li>
       </ul>
     </div>
   </div>
 </div>
 
 
-<div data-role="page"  id="setting">
-  <div data-role="header" data-position="fixed">
-    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
-    <h1>系统设置</h1>
-  </div>
-
-  <div data-role="content">
-    <p>Goodbye!</p>
-    <a href="#pageone">转到页面一</a>
-  </div>
-
-  <div data-role="footer" data-position="fixed">
-    <div data-role="navbar">
-      <ul>
-        <li><a href="#main" data-icon="grid">全部</a></li>
-        <li><a href="#alertpush" data-icon="alert">报警</a></li>
-        <li><a href="#aipush" data-icon="info">疑点</a></li>
-        <li><a href="#setting" data-icon="gear" class="ui-btn-active ui-state-persist">设置</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 
-<div data-role="page"  id="device">
-  <div data-role="header" data-position="fixed">
-    <a href="/app/main" data-role="button" data-icon="home">井盖小兵</a>
-    <h1>井盖信息</h1>
-  </div>
-
-  <div data-role="content">
-    <p>Goodbye!</p>
-    <a href="#pageone">转到页面一</a>
-  </div>
-
-  <div data-role="footer">
-  <h1>页脚文本</h1>
-  </div>
-
-</div>
 
 </body>
 </html>
+
+<script type="text/javascript">
+	
+	// 百度地图API功能
+	var map = new BMap.Map("allmap",{enableMapClick:false});
+	
+	// 添加带有定位的导航控件
+  	var navigationControl = new BMap.NavigationControl({
+	    // 靠左上角位置
+	    anchor: BMAP_ANCHOR_TOP_LEFT,
+	    // LARGE类型
+	    type: BMAP_NAVIGATION_CONTROL_LARGE,
+	    // 启用显示定位
+	    enableGeolocation: true
+  	});
+  	map.addControl(navigationControl);
+  	
+  	
+  	//获取覆盖物位置
+	function attribute(e){
+		//var p = e.target;
+		//alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat); 
+		
+		var p = e.target;
+		var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+		var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象 
+		map.openInfoWindow(infoWindow,point); //开启信息窗口
+	}
+	
+  	// 编写自定义函数,创建标注
+	function addMarker(point, caption){
+	  var marker = new BMap.Marker(point,{title:caption});
+	  marker.addEventListener("click", attribute);
+	  map.addOverlay(marker);
+	}
+	
+  	// 添加定位控件
+  	var geolocationControl = new BMap.GeolocationControl();
+	geolocationControl.addEventListener("locationSuccess", function(e){
+	    // 定位成功事件
+	    var address = '';
+	    address += e.addressComponent.province;
+	    address += e.addressComponent.city;
+	    address += e.addressComponent.district;
+	    address += e.addressComponent.street;
+	    address += e.addressComponent.streetNumber;
+	    alert("当前定位地址为：" + address);
+	});
+	geolocationControl.addEventListener("locationError",function(e){
+		// 定位失败事件
+		alert(e.message);
+	});
+	
+	map.setMapStyle({style:'grayscale'})
+	map.addControl(geolocationControl);
+	map.centerAndZoom("嘉兴", 15);
+	map.enableScrollWheelZoom();
+	map.enableDragging(); // map.disableDragging();
+	
+	var pointArray = new Array();
+	//debugger
+	$.getJSON("/api/rtdata.json",{param:"USER_GUID"},function(data){  
+	
+	//此处返回的data已经是json对象
+	  $.each(data,function(idx,item){  
+	    console.log("name:"+item.imei+",value:"+item.rssi);  
+	    pointArray[idx] = new BMap.Point(item.lon, item.lat);
+		addMarker(pointArray[idx], item.id);
+	  });
+	  //让所有点在视野范围内
+	  map.setViewport(pointArray);
+	}); 
+
+		
+</script>

@@ -43,13 +43,14 @@ import io_config
 import io_db
 import io_app
 
+import multiprocessing
+
 def boot():
 
     print "1. load memory database server"
 
     # load memory database server
-    io_db.dbserver = io_db.IOTDBServer(io_config.settings['db_path'], "covguard")
-    io_db.dbserver.load()
+    io_db.openShareDB(io_config.settings['db_path'], io_config.settings['db_name'])
 
 
     #print "2. boot io udp server"
