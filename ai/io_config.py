@@ -18,12 +18,11 @@ debug = 1
 settings = {}
 
 settings['host'] = "0.0.0.0"
-if debug:
-    settings['port']  = 9100
-else:
-    settings['port']  = 9800
+settings['udp_echo_port']  = 9100
+settings['udp_data_port']  = 9800
 
 settings['db_path'] = os.getcwd()
+settings['db_name'] = "covg.db3"
 
 settings['webport'] = 8090
 
