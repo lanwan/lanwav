@@ -23,7 +23,7 @@ import zmq
 import redis
 
 __pool = redis.ConnectionPool(host='127.0.0.1', port=6379)
-__r = redis.Redis(connection_pool=pool)
+__r = redis.Redis(connection_pool=__pool)
 
 # <version tag>,<report number>,<imei>,<battery bcl>,<battery bcs>,<signal rssi>,<signal ber>,<sensor state>,<x hex>,<y hex>,<z hex>,<gps lon>,<gps lat>,<crc>\n
 def add_realtime_data(data):
