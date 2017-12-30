@@ -37,8 +37,8 @@ class AiUDPServer(SocketServer.BaseRequestHandler):
         data = self.request[0].strip().replace(" ", "")
         socket = self.request[1]
         #socket.sendto(data, self.client_address)
-        rs = time.strftime("%H%M%S")
-        socket.sendto('aw,%s,120.55.61.110:9100,360,120.795172,30.703541' % (rs), self.client_address)
+        #rs = time.strftime("%H%M%S")
+        socket.sendto('aw,120.55.61.110:9100,36,120.795172,30.703541', self.client_address)
 
         s = "http://120.55.61.110:8090/report?DT=%s" % (data)
         print s
