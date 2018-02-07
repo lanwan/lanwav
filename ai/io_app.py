@@ -92,7 +92,7 @@ class DebugHandler(BaseHandler):
         global debug_cmds
         cmd = self.get_argument('cmd', '')
         if cmd == '1':
-            return self.write( ''.join(debug_cmds) )
+            return self.write( '\r\n'.join(debug_cmds) )
         else:
             debug_cmds = []
             return self.write( 'clear done' )
