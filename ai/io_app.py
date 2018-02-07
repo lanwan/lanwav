@@ -22,6 +22,7 @@ import tornado.web
 import tornado.websocket
 import tornado.httpserver
 import tornado.options
+from tornado import gen
 
 class BaseHandler(tornado.web.RequestHandler):
     def get_current_user(self):
