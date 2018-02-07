@@ -144,9 +144,9 @@ class RealtimeDataHandler(BaseHandler):
     def get(self):
         if self.get_current_user():
             s = yield get_realtime_dataset( self.get_current_role_id() )
-            return self.write( s )
+            self.write( s )
         else:
-            return self.write('{error}')
+            self.write('{error}')
 
 
 ################################################################################
